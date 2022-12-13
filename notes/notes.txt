@@ -1,3 +1,5 @@
+# aside: when working with callbacks particularly with async the first parameter is always the err
+
 # INTRO
 
 This course was came from the tutorial found at 
