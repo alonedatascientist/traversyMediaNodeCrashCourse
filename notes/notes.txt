@@ -1,3 +1,14 @@
+# INTRO
+
 This course was came from the tutorial found at 
 https://www.youtube.com/watch?v=fBNz5xF-Kx4&list=PLzzAy4feaMX15SAkf0ujN1VX-ucTb-oN9&index=1
 
+What is Node JS? A Java Script run time used to run Java Script outside of a browser as a server side language. Node is also used frequently for APIs and various run time services.
+
+Why choose Node? Node is fast, effective, event driven (runs on a single loop) w/ a non blocking I/O model, its very popular in the industry and if you are already learning JS it allows you to use the same language on the front and backend(s). 
+
+Non-Blocking I/O explained: Node/JS works on a non-blocking single thread. It supports tens of thousands of concurrent connections and optimizes throughput/scalablity/I/O operations -- making it very fast.
+
+Best types of node projects - really anything not CPU intensive. Its great for REST API / Microservices, real time services (chat, live updates, etc), CRUD apps (blogs, shopping, social networks), tools and utilities.
+
+Node Modules - provide various functionality for us. Some are core built in modules, others are 3rd party (installed via NPM), or your own custom modules (files) can be imported and used.
