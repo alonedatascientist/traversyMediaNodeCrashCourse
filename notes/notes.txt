@@ -14,3 +14,5 @@ Non-Blocking I/O explained: Node/JS works on a non-blocking single thread. It su
 Best types of node projects - really anything not CPU intensive. Its great for REST API / Microservices, real time services (chat, live updates, etc), CRUD apps (blogs, shopping, social networks), tools and utilities.
 
 Node Modules - provide various functionality for us. Some are core built in modules, others are 3rd party (installed via NPM), or your own custom modules (files) can be imported and used.
+
+In node/js we have a class called EventEmitter these instances emmit particular 'events' that can then be listened for by other functions ('listeners') that then take a particular action (a function usually) after the event has been emiited and heard by the listener
