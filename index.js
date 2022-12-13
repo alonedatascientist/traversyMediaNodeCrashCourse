@@ -4,27 +4,64 @@ const path = require('path')
 const fs = require('fs')
 
 const server = http.createServer((req, res) => {
-  // note: '/' means "root" directory
-  if (req.url === '/') {
-    fs.readFile(path.join(__dirname, 'public', 'index.html'), (err, content) => {
-      if (err) throw err
-      res.writeHead(200, 'Content-Type: text/html')
-      res.end(content)
-    })
+
+  // build file path
+  let filePath = path.join(
+    __dirname,
+    'public',
+    req.url === '/' ? 'index.html' : req.url // if req url is root dir then serve the homepage else serve whatever the req url is
+  )
+  
+  // get file extension name for file being sent
+  let ext = path.extname(filePath)
+
+  // content set to text/html because thats the majority of content type usually recieved 
+  let contentType = 'text/html'
+
+  // check file extension type then set content type accordingly 
+  switch(ext) {
+    case '.js':
+      contentType = 'text/javascript';
+      break;
+    case '.css': 
+      contentType = 'text/css';
+      break;
+    case '.json':
+      contentType = 'application/json';
+      break;
+    case '.png':
+      contentType = 'image/png';
+      break;
+    case '.jpg':
+      contentType = 'image/jpg';
+      break;
   }
 
-  // API fmt
-  if (req.url === '/api/users') {
-    const users = [
-      {name: 'Joe James', age: 33},
-      {name: 'Joe Dave', age: 18},
-      {name: 'Joe Jee', age: 25},
-    ];
-    res.writeHead(200, {'Content-Type': 'application/json'})
-    res.end(JSON.stringify(users))
-  }
-  
-})
+  // read file
+  fs.readFile(filePath, (err, content) => {
+    if (err) {
+      if (err.code === "ENOENT") {
+        // 404 page not found
+        fs.readFile(path.join(__dirname, 'public', '404.html'), (err, content) => {
+          res.writeHead(200, {'Content-Type': contentType})
+          res.end(content, 'utf-8')
+        })
+        
+      } else {
+        // some other server error
+        res.writeHead(500)
+        res.end(`Internal Error: ${err.code}`)
+
+      }
+    }
+    else {
+      res.writeHead(200, {'Content-Type': contentType})
+      res.end(content, 'utf-8')
+    }
+
+  })
+
+});
 
 const PORT = process.env.port || 3000
 
